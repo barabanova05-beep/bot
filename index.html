@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f6f2">
+  <meta name="description" content="Переплёт — электронная библиотека и место для хороших историй.">
+  <title>Переплёт — библиотека</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar" aria-label="Шапка библиотеки">
+      <a href="#" class="wordmark" id="home-link" aria-label="Переплёт — главная">
+        <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>переплёт<span class="period">.</span></span>
+      </a>
+      <div class="topbar-right"><span class="topbar-edition">БИБЛИОТЕКА / 006</span><button class="avatar" id="profile-trigger" type="button" aria-label="Мои книги">Ч</button></div>
+    </header>
+
+    <main>
+      <section class="screen screen-active" id="screen-catalog" aria-label="Каталог книг">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="rule"></span> ТВОЁ МЕСТО ДЛЯ ИСТОРИЙ</p>
+            <h1 id="hero-title">Книги, в которых<br>хочется <em>остаться.</em></h1>
+            <p class="hero-note">Истории, к которым хочется возвращаться.</p>
+            <button class="hero-link" id="hero-explore" type="button">Перейти к книгам <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="hero-visual" aria-hidden="true"><div class="graphic-book book-behind"></div><div class="graphic-book book-front"><span>том<br>первый</span><b>П</b><small>ЛИТЕРАТУРНОЕ СОБРАНИЕ</small></div><div class="hero-flower">✳</div></div>
+          <div class="hero-foot"><span>01 — КНИЖНАЯ ПОЛКА</span><span>ЛИСТАЙ И ВЫБИРАЙ</span></div>
+        </section>
+
+        <section class="catalog-area" id="catalog-anchor">
+          <div class="section-head"><div><p class="section-kicker">КОЛЛЕКЦИЯ</p><h2>В библиотеке <span class="book-count" id="book-count">—</span></h2></div><span class="section-head-mark" aria-hidden="true">✳</span></div>
+          <label class="search-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg><input id="search" type="search" autocomplete="off" placeholder="Название, автор или жанр" aria-label="Найти книгу"><span class="search-hint">⌕</span></label>
+          <div class="filters" id="genre-filters" role="group" aria-label="Фильтр по жанру"><button type="button" class="chip selected" data-genre="Все">Все</button></div>
+          <div class="catalog-meta"><span id="results-label">Загружаем книги...</span><label class="only-available"><input type="checkbox" id="available-only"><span class="fake-checkbox"></span> В наличии</label></div>
+          <div class="book-grid" id="book-grid" aria-live="polite"><div class="skeleton-book"></div><div class="skeleton-book"></div></div>
+          <div class="empty-state hidden" id="empty-catalog"><span class="empty-icon">∅</span><h3>Ничего не нашли</h3><p>Попробуйте другое название или измените фильтр.</p><button type="button" id="clear-filters" class="small-link">Сбросить фильтры ↗</button></div>
+        </section>
+      </section>
+
+      <section class="screen" id="screen-shelf" aria-label="Избранное">
+        <div class="subpage-head"><p class="section-kicker">ИЗБРАННОЕ / 02</p><h1>Моя <em>полка.</em></h1><p>Сохраняй книги, которые хочешь прочитать. Избранное хранится на этом устройстве.</p></div>
+        <div class="shelf-summary"><div><span class="summary-caption">В ИЗБРАННОМ</span><strong id="shelf-count">0</strong></div><div class="shelf-line-art" aria-hidden="true">▥</div></div>
+        <div id="shelf-list" class="shelf-list"></div><button type="button" id="view-reservations" class="outline-button shelf-check-button">Мои бронирования в Telegram →</button>
+        <div class="empty-state" id="empty-shelf"><span class="empty-icon">↗</span><h3>Начни с первой книги</h3><p>Добавляй понравившиеся книги из каталога — они появятся здесь.</p><button type="button" class="small-link" data-switch="catalog">Смотреть каталог ↗</button></div>
+      </section>
+
+      <section class="screen" id="screen-picks" aria-label="Рекомендации">
+        <div class="subpage-head"><p class="section-kicker">РЕКОМЕНДУЕМ / 03</p><h1>Стоит <em>прочитать.</em></h1><p>Несколько историй, с которых приятно начать знакомство.</p></div>
+        <div class="picks-headline"><span>НАША ПОДБОРКА</span><span id="picks-note">ВЫБОР РЕДАКЦИИ</span></div>
+        <div id="picks-list" class="picks-list"></div><button type="button" id="ask-recommendation" class="primary-button">Рекомендация по оценкам из базы MySQL <span>↗</span></button>
+        <div class="quote-card"><span class="quote-mark">“</span><p>Чтение — это разговор с самыми лучшими людьми прошедших времён.</p><span>РЕНЕ ДЕКАРТ</span></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Основная навигация">
+      <button class="nav-item active" data-tab="catalog" type="button" aria-current="page"><svg viewBox="0 0 24 24" class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.65" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 4.5v17M8 7h8M8 11h6"/></svg><span>Каталог</span></button>
+      <button class="nav-item" data-tab="shelf" type="button"><svg viewBox="0 0 24 24" class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.65" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v16h-4zM16 6l3-1 4 14-3 1z"/></svg><span>Избранное</span><span class="nav-dot hidden" id="shelf-dot"></span></button>
+      <button class="nav-item" data-tab="picks" type="button"><svg viewBox="0 0 24 24" class="nav-icon" fill="none" stroke="currentColor" stroke-width="1.65" aria-hidden="true"><path d="m12 2 2.7 6.5L21 11l-6.3 2.6L12 21l-2.7-7.4L3 11l6.3-2.5z"/><path d="M19 2v4M17 4h4"/></svg><span>Подборка</span></button>
+    </nav>
+  </div>
+
+  <dialog id="book-dialog" class="book-dialog" aria-labelledby="detail-title"><div class="detail-content"><button class="close-detail" id="close-dialog" type="button" aria-label="Закрыть">×</button><div class="detail-cover-wrap" id="detail-cover"></div><p class="section-kicker" id="detail-genre"></p><h2 id="detail-title"></h2><p id="detail-author" class="detail-author"></p><div class="detail-facts"><span id="detail-rating"></span><span id="detail-availability"></span></div><div class="detail-divider"></div><div class="detail-section"><p class="section-kicker">ВАША ОЦЕНКА</p><div class="rating-picker" id="rating-picker" role="group" aria-label="Оцените книгу"><button type="button" data-rate="1" aria-label="1 из 5">★</button><button type="button" data-rate="2" aria-label="2 из 5">★</button><button type="button" data-rate="3" aria-label="3 из 5">★</button><button type="button" data-rate="4" aria-label="4 из 5">★</button><button type="button" data-rate="5" aria-label="5 из 5">★</button><span id="my-rating-note">Выберите оценку</span></div><button id="save-rating" class="outline-button" type="button">Отправить оценку боту</button></div><button id="favorite-button" class="outline-button" type="button">Сохранить в избранное</button><button id="reserve-button" class="primary-button" type="button">Забронировать через бота <span>↗</span></button><button id="send-to-bot" type="button" class="detail-share">Информация о книге в чате →</button></div></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
